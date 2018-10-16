@@ -1,0 +1,68 @@
+====================== 
+PCAP file information 
+====================== 
+Pcap file path:	pcap/datasets/loc1-20020523-1835.pcap
+Total packet count:	46123693 packets
+Recognized packets:	46111894 packets
+Unrecognized packets:	11799 PDUs
+% Recognized packets:	99.9744 %
+% Unrecognized packets:	0.0256 %
+Last unknown PDU:	2002-05-23 16:50:01.715216
+Capture duration:	900.0691 seconds
+Capture start:		2002-05-23 16:35:01.691172
+Capture end:		2002-05-23 16:50:01.760261
+====================== 
+Interval statistics 
+====================== 
+---------------------- 
+840000000 microseconds 
+---------------------- 
+correct_tcp_checksum_count:	322
+first_pkt_timestamp:	1022171701691172
+incorrect_tcp_checksum_count:	33553575
+interval_count:	1
+ip_dst_cum_entropy:	9.4035
+ip_dst_cum_entropy_normalized:	1.0
+ip_dst_entropy:	9.405
+ip_dst_entropy_normalized:	1.0
+ip_dst_novel_count:	37959
+ip_dst_novel_entropy:	9.405
+ip_dst_novel_entropy_normalized:	1.0
+ip_src_cum_entropy:	9.4105
+ip_src_cum_entropy_normalized:	1.0
+ip_src_entropy:	9.412
+ip_src_entropy_normalized:	1.0
+ip_src_novel_count:	37959
+ip_src_novel_entropy:	9.412
+ip_src_novel_entropy_normalized:	1.0
+kbyte_rate:	1900.5527
+kbytes:	1596464.25
+last_pkt_timestamp:	1022172541691411
+mss_entropy:	1.087
+mss_entropy_normalized:	1.0
+mss_novel_count:	43
+mss_novel_entropy:	1.087
+mss_novel_entropy_normalized:	1.0
+payload_count:	221279
+pkt_rate:	51296.3867
+pkts_count:	43088963
+port_entropy:	8.8895
+port_entropy_normalized:	1.0
+port_novel_count:	21313
+port_novel_entropy:	8.8895
+port_novel_entropy_normalized:	1.0
+tos_entropy:	0.6559
+tos_entropy_normalized:	1.0
+tos_novel_count:	57
+tos_novel_entropy:	0.6559
+tos_novel_entropy_normalized:	1.0
+ttl_entropy:	3.8599
+ttl_entropy_normalized:	1.0
+ttl_novel_count:	238
+ttl_novel_entropy:	3.8599
+ttl_novel_entropy_normalized:	1.0
+win_size_entropy:	6.4796
+win_size_entropy_normalized:	1.0
+win_size_novel_count:	41269
+win_size_novel_entropy:	6.4796
+win_size_novel_entropy_normalized:	1.0
