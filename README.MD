@@ -1,5 +1,5 @@
 # plot_interval_statistics
-A python3 script used to plot interval statistics provided by an ID2T interval statistics export.
+A python3 script used to plot interval statistics provided by an [ID2T](https://git.tk.informatik.tu-darmstadt.de/SPIN/ID2T-toolkit) interval statistics export.
 
 ## Usage:
 
