@@ -107,8 +107,8 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     fig, ax = plt.subplots()
 
     # FIXME: workaround for xticklabels
-    ind = np.arange(len(types)-1)
-    width = 0.15
+    ind = np.arange(start=0, stop=2*(len(types)-1), step=2)
+    width = 0.24
     half = int(len(data)/2)
     add = -half
     bars = []
