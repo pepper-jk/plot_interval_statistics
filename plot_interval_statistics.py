@@ -106,6 +106,7 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
 
     fig, ax = plt.subplots()
 
+
     # FIXME: workaround for xticklabels
     ind = np.arange(start=0, stop=2*(len(types)-1), step=2)
     width = 0.24
@@ -126,7 +127,7 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     ax.set_ylabel(ylabel)
     #ax.set_title(plot_name)
     ax.set_xticklabels(types)
-    ax.legend(bars, data.keys(), loc='center left', bbox_to_anchor=(1, 0.5))
+    ax.legend(bars, data.keys(), bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
 
     # plot
     plt.savefig(plot_name.lower().replace(" ", "_") + ".png", dpi=300, bbox_inches='tight')
