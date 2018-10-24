@@ -117,9 +117,6 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
         bars.append(ax.bar(ind+width*add, list(values.values()), width))
         add = add + 1
 
-    # use the Garcia preset
-    pp.post_paper_plot(bw_friendly=True)
-
     # label
     ylabel = "Entropy"
     if plot_name.lower().find("normalized") != -1:
@@ -127,6 +124,11 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     ax.set_ylabel(ylabel)
     #ax.set_title(plot_name)
     ax.set_xticklabels(types)
+
+    # use the Garcia preset
+    pp.post_paper_plot(bw_friendly=True)
+
+    # legend
     ax.legend(bars, data.keys(), bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
 
     # plot
