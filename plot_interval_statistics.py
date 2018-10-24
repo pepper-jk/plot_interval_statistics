@@ -8,6 +8,7 @@ import sys
 
 import development_matplotlib.paper_plots as pp
 
+
 def parse_interval_stats(file_path: str) -> dict({str: list}):
     """
     Parsing function for ID2Ts interval statistics export files.
@@ -89,6 +90,12 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     :param plot_name: name of the output file
     :return: True on success and False on failure
     """
+    def savepdfviasvg(fig, name, **kwargs):
+        import subprocess
+        fig.savefig(name + ".svg", format="svg", **kwargs)
+        incmd = ["inkscape", name + ".svg", "--export-pdf={}.pdf".format(name),
+                 "--export-pdf-version=1.5"]  # "--export-ignore-filters",
+        subprocess.check_output(incmd)
 
     # default data for testing
     if data is None:
@@ -101,11 +108,11 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     for key in data.keys():
         types += list(data[key].keys())
         break
+
     # use the Garcia preset
-    pp.pre_paper_plot()
+    pp.pre_paper_plot(True)
 
     fig, ax = plt.subplots()
-
 
     # FIXME: workaround for xticklabels
     ind = np.arange(start=0, stop=2*(len(types)-1), step=2)
@@ -126,13 +133,15 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     ax.set_xticklabels(types)
 
     # use the Garcia preset
-    pp.post_paper_plot(bw_friendly=True)
+    pp.post_paper_plot(change=True, bw_friendly=True, adjust_spines=False, sci_y=False)
 
     # legend
     ax.legend(bars, data.keys(), bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
 
     # plot
-    plt.savefig(plot_name.lower().replace(" ", "_") + ".png", dpi=300, bbox_inches='tight')
+    filename = plot_name.lower().replace(" ", "_")
+    savepdfviasvg(fig, filename, dpi=300, bbox_inches='tight')
+    #plt.savefig(filename, dpi=300, bbox_inches='tight', format='pdf')
 
     return True
 
