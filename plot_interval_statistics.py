@@ -102,8 +102,7 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
         print("Error: no data")
         return False
 
-    # FIXME: workaround for xticklabels
-    types = ["aaa"]
+    types = []
     # FIXME: workaround, since data[0].keys() does not work
     for key in data.keys():
         types += list(data[key].keys())
@@ -114,8 +113,8 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
 
     fig, ax = plt.subplots()
 
-    # FIXME: workaround for xticklabels
-    ind = np.arange(start=0, stop=2*(len(types)-1), step=2)
+    ind = np.arange(start=0, stop=2*(len(types)), step=2)
+    plt.xticks(ind)
     width = 0.24
     half = int(len(data)/2)
     add = -half
@@ -177,7 +176,6 @@ def main(argv):
     data_novel = extract(file_paths, novel=True)
     data_novel_norm = extract(file_paths, normalized=True, novel=True)
     data_cum = extract(file_paths, cumulative=True)
-
 
     # plot statistics
     result = plot(data, plot_name="Average Interval Entropy")
