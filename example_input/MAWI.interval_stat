@@ -1,0 +1,68 @@
+====================== 
+PCAP file information 
+====================== 
+Pcap file path:	pcaps/MAWI/201809171400.pcap
+Total packet count:	72308318 packets
+Recognized packets:	68262796 packets
+Unrecognized packets:	4045522 PDUs
+% Recognized packets:	94.4052 %
+% Unrecognized packets:	5.5948 %
+Last unknown PDU:	2018-09-17 05:15:00.059104
+Capture duration:	899.9326 seconds
+Capture start:		2018-09-17 05:00:00.126493
+Capture end:		2018-09-17 05:15:00.059117
+====================== 
+Interval statistics 
+====================== 
+---------------------- 
+840000000 microseconds 
+---------------------- 
+correct_tcp_checksum_count:	13326584
+first_pkt_timestamp:	1537160400126493
+incorrect_tcp_checksum_count:	18265627
+interval_count:	1
+ip_dst_cum_entropy:	13.4718
+ip_dst_cum_entropy_normalized:	0.5627
+ip_dst_entropy:	14.1898
+ip_dst_entropy_normalized:	0.5938
+ip_dst_novel_count:	16122527
+ip_dst_novel_entropy:	14.1898
+ip_dst_novel_entropy_normalized:	0.5927
+ip_src_cum_entropy:	8.8715
+ip_src_cum_entropy_normalized:	0.3705
+ip_src_entropy:	9.3159
+ip_src_entropy_normalized:	0.4211
+ip_src_novel_count:	16122527
+ip_src_novel_entropy:	9.3159
+ip_src_novel_entropy_normalized:	0.3891
+kbyte_rate:	2496.6096
+kbytes:	2097152.0
+last_pkt_timestamp:	1537161240126545
+mss_entropy:	2.3954
+mss_entropy_normalized:	0.3066
+mss_novel_count:	225
+mss_novel_entropy:	2.3954
+mss_novel_entropy_normalized:	0.3066
+payload_count:	1315532
+pkt_rate:	80277.8828
+pkts_count:	67433420
+port_entropy:	8.7243
+port_entropy_normalized:	0.5453
+port_novel_count:	65533
+port_novel_entropy:	8.7243
+port_novel_entropy_normalized:	0.5453
+tos_entropy:	0.6236
+tos_entropy_normalized:	0.1065
+tos_novel_count:	58
+tos_novel_entropy:	0.6236
+tos_novel_entropy_normalized:	0.1065
+ttl_entropy:	3.9892
+ttl_entropy_normalized:	0.5023
+ttl_novel_count:	246
+ttl_novel_entropy:	3.9892
+ttl_novel_entropy_normalized:	0.5023
+win_size_entropy:	8.1688
+win_size_entropy_normalized:	0.5124
+win_size_novel_count:	62943
+win_size_novel_entropy:	8.1688
+win_size_novel_entropy_normalized:	0.5124

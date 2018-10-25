@@ -8,10 +8,12 @@ A python3 script used to plot interval statistics provided by an [ID2T](https://
 
 ## Example output:
 
-![Average Interval Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/images/average_interval_entropy.png)
+![Average Interval Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/example_output/average_interval_entropy.svg?sanitize=true)
 
-![Average Interval Normalized Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/images/average_normalized_interval_entropy.png)
+![Average Interval Normalized Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/example_output/average_normalized_interval_entropy.svg?sanitize=true)
 
-![Average Interval Novelty Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/images/average_novelty_interval_entropy.png)
+![Average Interval Novelty Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/example_output/average_novelty_interval_entropy.svg?sanitize=true)
 
-![Average Interval Normalized Novelty Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/images/average_normalized_novelty_interval_entropy.png)
+![Average Interval Normalized Novelty Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/example_output/average_normalized_novelty_interval_entropy.svg?sanitize=true)
+
+![Average Cumulative Entropies](https://github.com/pepper-jk/plot_interval_statistics/raw/master/example_output/average_cumulative_interval_entropy.svg?sanitize=true)
