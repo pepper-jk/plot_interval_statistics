@@ -82,6 +82,32 @@ def extract(file_paths: list([str]), normalized: bool=False, novel: bool=False, 
 
     return data
 
+def extract_traffic(file_paths: list([str]), key: str) -> list(dict({str: list})):
+    """
+    Extract the traffic relevant values from interval statistics.
+
+    :param file_paths: list with file paths
+    :param key:
+    :return:
+    """
+    data = {}
+
+    # iterate over all interval statistics file
+    for file_path in file_paths:
+        name = file_path[file_path.rfind("/")+1:-len(".interval_stat")]
+        interval_stats = parse_interval_stats(file_path)
+
+        data.update({name: interval_stats[key]})
+
+    return data
+
+def savepdfviasvg(fig, name, **kwargs):
+    import subprocess
+    fig.savefig(name + ".svg", format="svg", **kwargs)
+    incmd = ["inkscape", name + ".svg", "--export-pdf={}.pdf".format(name),
+             "--export-pdf-version=1.5"]  # "--export-ignore-filters",
+    subprocess.check_output(incmd)
+
 def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     """
     Plot dataset entropies.
@@ -90,12 +116,6 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     :param plot_name: name of the output file
     :return: True on success and False on failure
     """
-    def savepdfviasvg(fig, name, **kwargs):
-        import subprocess
-        fig.savefig(name + ".svg", format="svg", **kwargs)
-        incmd = ["inkscape", name + ".svg", "--export-pdf={}.pdf".format(name),
-                 "--export-pdf-version=1.5"]  # "--export-ignore-filters",
-        subprocess.check_output(incmd)
 
     # default data for testing
     if data is None:
@@ -144,6 +164,19 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
 
     return True
 
+def plot_traffic(data: list(dict({str: list}))=None, plot_name: str="line") -> bool:
+    """
+    Plot dataset entropies.
+
+    :param data: a list of dictionaries containing entropies from multiple entropies
+    :param plot_name: name of the output file
+    :return: True on success and False on failure
+    """
+
+    # TODO: plot graphs here?
+
+    return True
+
 def main(argv):
     """
     Parsing, calculating and plotting average entropies from ID2T interval statistics files.
@@ -183,6 +216,18 @@ def main(argv):
     result = result and plot(data_novel, plot_name="Average Novelty Interval Entropy")
     result = result and plot(data_novel_norm, plot_name="Average Normalized Novelty Interval Entropy")
     result = result and plot(data_cum, plot_name="Average Cumulative Interval Entropy")
+
+    if not result:
+        return 1
+
+    relevant_keys = ["kbyte_rate", "kbytes", "payload_count", "pkts_count", "pkt_rate"]
+    for key in relevant_keys:
+        # extract traffic relevant data
+        data_traffic = extract_traffic(file_paths, key)
+
+        # plot traffic relevant data
+        result = plot_traffic(data_traffic, plot_name=key.replace("_"," "))
+
     if not result:
         return 1
 
