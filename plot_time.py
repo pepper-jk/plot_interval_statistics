@@ -17,8 +17,8 @@ def main(argv):
     """
 
     # plot statistics
-    result = plt.plot(read_statistics, plot_name="read statistics", ylabel="Time (second)", xlabel="Number of packets (million)")
-    result = result and plt.plot(packets_generated, plot_name="packets generated", ylabel="Time (second)", xlabel="Number of packets")
+    result = plt.plot(read_statistics, plot_name="read statistics", ylabel="Time (second)", xlabel="Number of packets (million)", annotate=True)
+    result = result and plt.plot(packets_generated, plot_name="packets generated", ylabel="Time (second)", xlabel="Number of packets", annotate=True)
     if not result:
         return 1
 
