@@ -10,7 +10,7 @@ def savepdfviasvg(fig, name, **kwargs):
                 "--export-pdf-version=1.5"]  # "--export-ignore-filters",
     subprocess.check_output(incmd)
 
-def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
+def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=None, xlabel: str=None) -> bool:
     """
     Plot dataset entropies.
 
@@ -46,10 +46,14 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
         add = add + 1
 
     # label
-    ylabel = "Entropy"
-    if plot_name.lower().find("normalized") != -1:
-        ylabel = "Normalized Entropy"
-    ax.set_ylabel(ylabel)
+    if plot_name.lower().find("entropy") != -1:
+        ylabel = "Entropy"
+        if plot_name.lower().find("normalized") != -1:
+            ylabel = "Normalized Entropy"
+    if ylabel != None:
+        ax.set_ylabel(ylabel)
+    if xlabel != None:
+        ax.set_xlabel(xlabel)
     #ax.set_title(plot_name)
     ax.set_xticklabels(types)
 
