@@ -10,7 +10,24 @@ def savepdfviasvg(fig, name, **kwargs):
                 "--export-pdf-version=1.5"]  # "--export-ignore-filters",
     subprocess.check_output(incmd)
 
-def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=None, xlabel: str=None) -> bool:
+def autolabel(ax, rects, xpos='center'):
+    """
+    Attach a text label above each bar in *rects*, displaying its height.
+
+    *xpos* indicates which side to place the text w.r.t. the center of
+    the bar. It can be one of the following {'center', 'right', 'left'}.
+    """
+
+    xpos = xpos.lower()  # normalize the case of the parameter
+    ha = {'center': 'center', 'right': 'left', 'left': 'right'}
+    offset = {'center': 0.5, 'right': 0.57, 'left': 0.43}  # x_txt = x + w*off
+
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()*offset[xpos], 0.985*height,
+                '{}'.format(height), ha=ha[xpos], va='bottom')
+
+def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=None, xlabel: str=None, annotate: bool=False) -> bool:
     """
     Plot dataset entropies.
 
@@ -38,12 +55,19 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=N
     ind = np.arange(start=0, stop=2*(len(types)), step=2)
     plt.xticks(ind)
     width = 0.24
+    if annotate:
+        width = width*2
     half = int(len(data)/2)
     add = -half
     bars = []
     for values in data.values():
         bars.append(ax.bar(ind+width*add, list(values.values()), width))
         add = add + 1
+
+    # label bars
+    if annotate:
+        for rects in bars:
+            autolabel(ax, rects)
 
     # label
     if plot_name.lower().find("entropy") != -1:
