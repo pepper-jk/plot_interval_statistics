@@ -82,6 +82,13 @@ def extract(file_paths: list([str]), normalized: bool=False, novel: bool=False, 
 
     return data
 
+def savepdfviasvg(fig, name, **kwargs):
+    import subprocess
+    fig.savefig(name + ".svg", format="svg", **kwargs)
+    incmd = ["inkscape", name + ".svg", "--export-pdf={}.pdf".format(name),
+                "--export-pdf-version=1.5"]  # "--export-ignore-filters",
+    subprocess.check_output(incmd)
+
 def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     """
     Plot dataset entropies.
@@ -90,12 +97,6 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar") -> bool:
     :param plot_name: name of the output file
     :return: True on success and False on failure
     """
-    def savepdfviasvg(fig, name, **kwargs):
-        import subprocess
-        fig.savefig(name + ".svg", format="svg", **kwargs)
-        incmd = ["inkscape", name + ".svg", "--export-pdf={}.pdf".format(name),
-                 "--export-pdf-version=1.5"]  # "--export-ignore-filters",
-        subprocess.check_output(incmd)
 
     # default data for testing
     if data is None:
