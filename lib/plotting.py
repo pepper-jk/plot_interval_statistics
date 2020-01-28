@@ -27,7 +27,7 @@ def autolabel(ax, rects, xpos='center'):
         ax.text(rect.get_x() + rect.get_width()*offset[xpos], 0.985*height,
                 '{}'.format(height), ha=ha[xpos], va='bottom')
 
-def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=None, xlabel: str=None, annotate: bool=False) -> bool:
+def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=None, xlabel: str=None, annotate: bool=False, legend: bool=True) -> bool:
     """
     Plot dataset entropies.
 
@@ -85,7 +85,8 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=N
     pp.post_paper_plot(change=True, bw_friendly=True, adjust_spines=False, sci_y=False)
 
     # legend
-    ax.legend(bars, data.keys(), bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
+    if legend:
+        ax.legend(bars, data.keys(), bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
 
     # plot
     filename = plot_name.lower().replace(" ", "_")
