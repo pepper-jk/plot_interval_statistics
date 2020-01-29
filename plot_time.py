@@ -20,7 +20,7 @@ read_statistics = {'Regular statistics': {'6': 81.3, '13': 181, '26': 380, '53':
 # num_pkts ~= attackers.count * packets.per-second
 # read seconds from output: Generating attack packets... done. (total: 2000 pkts in 4.067694902420044 seconds.)
 # FORMAT: attack: {num_pkts: seconds}
-packets_generated = {'DDoS': {'10000': 15, '100000': 155, '1000000': 1231}}
+packets_generated = {'DDoS': {'~10000': 9.09, '~50000': 10.18, '~100000': 26.05, '~250000': 42.22, '~500000': 58.06, '~1000000': 64.23}}
 
 def main(argv):
     """
