@@ -11,8 +11,8 @@ import lib.plotting as plt
 # num_pkts_mio is given by pcap, you need to provide pcaps with specific length manually
 # then read seconds from output: Loaded file statistics in 159. sec by PCAP file processor.
 # FORMAT: label: {num_pkts_mio: seconds}
-read_statistics = {'Regular statistics': {'11': 193, '23': 392, '57': 1058, '212': 4033},
-                   'With extra tests': {'11': 258, '23': 558, '57': 1354, '212': 5090}}
+read_statistics = {'Regular statistics': {'6': 81.3, '13': 181, '26': 380, '53': 850, '106': 1745, '212': 3875},
+                   'With extra tests': {'6': 116, '13': 242, '26': 500, '53': 1123, '106': 2315, '212': 5099}}
 
 # seconds it took to generate a given amount of packets
 # get with:

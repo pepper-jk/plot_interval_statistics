@@ -56,7 +56,7 @@ def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=N
     plt.xticks(ind)
     width = 0.24
     if annotate:
-        width = width*2
+        width = width*3.5
     half = int(len(data)/2)
     add = -half
     bars = []
