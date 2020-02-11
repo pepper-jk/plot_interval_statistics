@@ -104,3 +104,24 @@ class statistics_parser(object):
             data.update({name: entropies})
 
         return data
+
+    def extract_by_attribute(self):
+        data = {}
+        for attr in self.interval_attributes:
+            data[attr] = self.extract_attribute(attr)
+        return data
+
+    def extract_attribute(self, attribute: str):
+        """
+        extracts the interval statistics values of a specific attribute.
+
+        :param attribute: the attribute for which to get the interval statistics
+        :return:
+        """
+        data = {}
+
+        for name in self.interval_stats.keys():
+            if attribute in self.interval_stats[name].keys():
+                data.update({name: self.interval_stats[name][attribute]})
+
+        return data
