@@ -114,11 +114,11 @@ def main(argv):
     data_cum = extract(file_paths, cumulative=True)
 
     # plot statistics
-    result = plt.plot(data, plot_name="Average Interval Entropy")
-    result = result and plt.plot(data_norm, plot_name="Average Normalized Interval Entropy")
-    result = result and plt.plot(data_novel, plot_name="Average Novelty Interval Entropy")
-    result = result and plt.plot(data_novel_norm, plot_name="Average Normalized Novelty Interval Entropy")
-    result = result and plt.plot(data_cum, plot_name="Average Cumulative Interval Entropy")
+    result = plt.plot_bars(data, plot_name="Average Interval Entropy")
+    result = result and plt.plot_bars(data_norm, plot_name="Average Normalized Interval Entropy")
+    result = result and plt.plot_bars(data_novel, plot_name="Average Novelty Interval Entropy")
+    result = result and plt.plot_bars(data_novel_norm, plot_name="Average Normalized Novelty Interval Entropy")
+    result = result and plt.plot_bars(data_cum, plot_name="Average Cumulative Interval Entropy")
     if not result:
         return 1
 

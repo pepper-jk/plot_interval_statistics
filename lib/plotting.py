@@ -27,7 +27,7 @@ def autolabel(ax, rects, xpos='center'):
         ax.text(rect.get_x() + rect.get_width()*offset[xpos], 0.985*height,
                 '{}'.format(height), ha=ha[xpos], va='bottom')
 
-def plot(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=None, xlabel: str=None, annotate: bool=False, legend: bool=True) -> bool:
+def plot_bars(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: str=None, xlabel: str=None, annotate: bool=False, legend: bool=True) -> bool:
     """
     Plot dataset entropies.
 

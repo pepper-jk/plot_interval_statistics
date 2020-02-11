@@ -31,8 +31,8 @@ def main(argv):
     """
 
     # plot statistics
-    result = plt.plot(read_statistics, plot_name="read statistics", ylabel="Time (second)", xlabel="Number of packets (million)", annotate=True)
-    result = result and plt.plot(packets_generated, plot_name="packets generated", ylabel="Time (second)", xlabel="Number of packets", annotate=True, legend=False)
+    result = plt.plot_bars(read_statistics, plot_name="read statistics", ylabel="Time (second)", xlabel="Number of packets (million)", annotate=True)
+    result = result and plt.plot_bars(packets_generated, plot_name="packets generated", ylabel="Time (second)", xlabel="Number of packets", annotate=True, legend=False)
     if not result:
         return 1
 
