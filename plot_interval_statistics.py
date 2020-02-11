@@ -32,12 +32,14 @@ def main(argv):
         print("plot_interval_statistics.py <path_to_file_containing_interval_stats> ...")
         return 1
 
+    parser = parse.statistics_parser(file_paths)
+
     # extract entropies from interval stat files
-    data = parse.extract_entropies(file_paths)
-    data_norm = parse.extract_entropies(file_paths, normalized=True)
-    data_novel = parse.extract_entropies(file_paths, novel=True)
-    data_novel_norm = parse.extract_entropies(file_paths, normalized=True, novel=True)
-    data_cum = parse.extract_entropies(file_paths, cumulative=True)
+    data = parser.extract_entropies()
+    data_norm = parser.extract_entropies(normalized=True)
+    data_novel = parser.extract_entropies(novel=True)
+    data_novel_norm = parser.extract_entropies(normalized=True, novel=True)
+    data_cum = parser.extract_entropies(cumulative=True)
 
     # plot statistics
     result = plt.plot_bars(data, plot_name="Average Interval Entropy")
