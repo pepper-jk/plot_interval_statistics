@@ -94,3 +94,50 @@ def plot_bars(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: 
     #plt.savefig(filename, dpi=300, bbox_inches='tight', format='pdf')
 
     return True
+
+def plot_lines(data: dict(dict({str: list}))=None, plot_name: str="line", limiter=[0,-1], ylabel: str=None, xlabel: str=None, annotate: bool=False, legend: bool=True) -> bool:
+
+
+    # default data for testing
+    if data is None:
+        print("Error: no data")
+        return False
+
+    # use the Garcia preset
+    pp.pre_paper_plot(True)
+
+    fig, ax = plt.subplots()
+
+    xvalues = range(1,100)
+    if limiter != [0,-1]:
+        xvalues = range(limiter[0],limiter[-1])
+    for key, values in data.items():
+        ax.plot(xvalues,values[limiter[0]:limiter[-1]], label=key.replace("_", " "))
+
+    #ls = np.linspace(float(min(values[:100])),float(max(values[:100])),num=6)
+    #print(ls)
+
+    #plt.ylim(0.0,1)
+
+    xlabel = 'Time Windows'
+    if limiter != [0,-1]:
+        xlabel += ' (limited)'
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(plot_name.replace("_", " "))
+    if ylabel != None:
+        ax.set_ylabel(ylabel)
+
+    # use the Garcia preset
+    pp.post_paper_plot(change=True, bw_friendly=True, adjust_spines=False, sci_y=False)
+
+    # legend
+    if legend:
+        ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
+
+    # plot
+    filename = plot_name.lower().replace(" ", "_")
+    if limiter != [0,-1]:
+        filename += '_limited'
+    savepdfviasvg(fig, filename, dpi=600, bbox_inches='tight')
+
+    return True
