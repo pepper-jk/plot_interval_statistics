@@ -1,4 +1,6 @@
 import csv
+import os
+import xml.etree.ElementTree as etree
 
 
 class statistics_parser(object):
@@ -10,17 +12,17 @@ class statistics_parser(object):
         :param file_paths: list with file paths
         """
         self.file_paths = file_paths
+        self.label_files = {}
         self.interval_stats = {}
         self.interval_attributes = []
-        self.parse_interval_stats_files(self.file_paths)
+        self.parse_interval_stats_files()
+        self.parse_labels()
 
-    def parse_interval_stats_files(self, file_paths):
+    def parse_interval_stats_files(self):
         """
         
-
-        :param file_paths: list with file paths
         """
-        for file_path in file_paths:
+        for file_path in self.file_paths:
             name = file_path[file_path.rfind("/")+1:-len(".interval_stat")]
             interval_stats = self.parse_interval_stats(file_path)
             self.interval_stats[name] = interval_stats
@@ -53,12 +55,43 @@ class statistics_parser(object):
                         name = line[:pos]
                         # skip ':\t' at the beginning
                         data = csv.reader([line[pos+2:]], skipinitialspace=True)
-                        interval_stats.update({name: list(data)[0]})
+                        data = list(data)[0]
+                        for i, elem in enumerate(data):
+                            data[i] = float(elem)
+                        interval_stats.update({name: data})
 
             if not integrity:
                 print("not an interval statistics file")
 
             return interval_stats
+
+    def parse_labels(self):
+        for file_path in self.file_paths:
+            name = file_path[file_path.rfind("/")+1:-len(".interval_stat")]
+            file_path = file_path[:-len(".interval_stat")]+"_labels.xml"
+            if os.path.isfile(file_path):
+                self.label_files.update({name: etree.parse(file_path).getroot()})
+
+    def get_label_file(self, name: str):
+        if name not in self.label_files.keys():
+            return None
+        return self.label_files[name]
+
+    def get_label_file_info(self, name: str, label: str):
+        if name not in self.label_files.keys():
+            return None
+        result = []
+        for elem in self.label_files[name].iter():
+            if elem.tag == label:
+                result.append(elem.text)
+        return result
+
+    def get_label_files_info(self, label: str):
+        label_files_info = {}
+        for file_path in self.file_paths:
+            name = file_path[file_path.rfind("/")+1:-len(".interval_stat")]
+            label_files_info.update({name: self.get_label_file_info(name, label)})
+        return label_files_info
 
     def get_interval_attributes(self):
         return self.interval_attributes
