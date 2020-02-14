@@ -47,10 +47,6 @@ def main(argv):
     result = result and plt.plot_bars(data_novel, plot_name="Average Novelty Interval Entropy")
     result = result and plt.plot_bars(data_novel_norm, plot_name="Average Normalized Novelty Interval Entropy")
     result = result and plt.plot_bars(data_cum, plot_name="Average Cumulative Interval Entropy")
-
-    # extract interval statistics by attribute
-    data = parser.extract_by_attribute()
-
     if not result:
         return 1
 
