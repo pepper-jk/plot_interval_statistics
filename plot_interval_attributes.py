@@ -59,6 +59,7 @@ def main(argv):
 
     limiting_ts.sort()
     limit = []
+    previous_ts = limiting_ts[0]
 
     for val in data["last_pkt_timestamp"].values():
         for i, ts in enumerate(val):
@@ -71,8 +72,16 @@ def main(argv):
             previous_ts = ts
         break
 
-    result = plt.plot_lines(data["ttl_entropy_normalized"], plot_name="TTL entropy normalized")
-    result = result and plt.plot_lines(data["ttl_entropy_normalized"], plot_name="TTL entropy normalized", limiter=limit)
+    attributes = {"ttl_entropy_normalized": "TTL entropy normalized",
+                  "ttl_novel_count": "TTL novel count",
+                  "ttl_novel_entropy_normalized": "TTL novel entropy normalized",
+                  "pkts_count": "Amount of packets",
+                  "ip_dst_entropy_normalized": "IP destination entropy normalized"}
+
+    result = True
+    for attr, name in attributes.items():
+        result = result and plt.plot_lines(data[attr], plot_name=name)
+        result = result and plt.plot_lines(data[attr], plot_name=name, limiter=limit)
 
     if not result:
         return 1
