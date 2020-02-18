@@ -142,3 +142,68 @@ def plot_lines(data: dict(dict({str: list}))=None, plot_name: str="line", limite
     savepdfviasvg(fig, filename, dpi=600, bbox_inches='tight')
 
     return True
+
+def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None, plot_name: str="line", limiter=[0,-1], ylabel: str=None, xlabel: str=None, annotate: bool=False, legend: bool=True) -> bool:
+
+
+    # default data for testing
+    if data is None:
+        print("Error: no data")
+        return False
+
+    # use the Garcia preset
+    pp.pre_paper_plot(True)
+
+    i = 1
+    for attr, name in attributes.items():
+        plt.subplot(len(attributes.items()), 1, i)
+        for key, values in data[attr].items():
+            if limiter != [0,-1]:
+                xvalues = range(limiter[0]+1,limiter[-1]+1)
+            else:
+                xvalues = range(1,len(list(values)))
+            plt.plot(xvalues,values[limiter[0]:limiter[-1]], label=key.replace("_", " "))
+
+        #ls = np.linspace(float(min(values[:100])),float(max(values[:100])),num=6)
+        #print(ls)
+
+        #plt.ylim(0.0,1)
+        plt.title(name.replace("_", " "))
+        if ylabel != None:
+            plt.title(ylabel, loc='right', pad=100)
+        plt.grid(True)
+
+        # legend
+        if i == 1 and legend:
+            plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
+
+        if i != len(attributes.items()):
+            plt.tick_params(
+                axis='x',          # changes apply to the x-axis
+                which='both',      # both major and minor ticks are affected
+                bottom=False,      # ticks along the bottom edge are off
+                top=False,         # ticks along the top edge are off
+                labelbottom=False) # labels along the bottom edge are off
+
+        i += 1
+
+    xlabel = 'Time Windows'
+    if limiter != [0,-1]:
+        xlabel += ' (limited)'
+    plt.xlabel(xlabel)
+
+    # use the Garcia preset
+    pp.post_paper_plot(change=True, bw_friendly=True, adjust_spines=False, sci_y=False)
+
+    # plot
+    filename = plot_name.lower().replace(" ", "_")
+    if limiter != [0,-1]:
+        filename += '_limited'
+
+    import subprocess
+    plt.savefig(name + ".svg", format="svg")
+    incmd = ["inkscape", name + ".svg", "--export-pdf={}.pdf".format(name),
+                "--export-pdf-version=1.5"]  # "--export-ignore-filters",
+    subprocess.check_output(incmd)
+
+    return True
