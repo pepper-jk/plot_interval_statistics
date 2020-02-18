@@ -108,10 +108,11 @@ def plot_lines(data: dict(dict({str: list}))=None, plot_name: str="line", limite
 
     fig, ax = plt.subplots()
 
-    xvalues = range(1,100)
-    if limiter != [0,-1]:
-        xvalues = range(limiter[0],limiter[-1])
     for key, values in data.items():
+        if limiter != [0,-1]:
+            xvalues = range(limiter[0]+1,limiter[-1]+1)
+        else:
+            xvalues = range(1,len(list(values)))
         ax.plot(xvalues,values[limiter[0]:limiter[-1]], label=key.replace("_", " "))
 
     #ls = np.linspace(float(min(values[:100])),float(max(values[:100])),num=6)
