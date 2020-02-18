@@ -77,10 +77,7 @@ def main(argv):
                   "ip_src_entropy": "IP source entropy",
                   "ip_dst_entropy": "IP destination entropy"}
 
-    result = True
-    for attr, name in attributes.items():
-        result = result and plt.plot_lines(data[attr], plot_name=name)
-        result = result and plt.plot_lines(data[attr], plot_name=name, limiter=limit)
+    result = plt.plot_multi_lines(data, attributes)
 
     if not result:
         return 1
