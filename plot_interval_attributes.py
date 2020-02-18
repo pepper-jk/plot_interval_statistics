@@ -72,11 +72,10 @@ def main(argv):
             previous_ts = ts
         break
 
-    attributes = {"ttl_entropy_normalized": "TTL entropy normalized",
-                  "ttl_novel_count": "TTL novel count",
-                  "ttl_novel_entropy_normalized": "TTL novel entropy normalized",
+    attributes = {"ttl_entropy": "TTL entropy",
                   "pkts_count": "Amount of packets",
-                  "ip_dst_entropy_normalized": "IP destination entropy normalized"}
+                  "ip_src_entropy": "IP source entropy",
+                  "ip_dst_entropy": "IP destination entropy"}
 
     result = True
     for attr, name in attributes.items():
