@@ -25,9 +25,10 @@ class statistics_parser(object):
         for file_path in self.file_paths:
             name = file_path[file_path.rfind("/")+1:-len(".interval_stat")]
             interval_stats = self.parse_interval_stats(file_path)
-            self.interval_stats[name] = interval_stats
-        for attr in interval_stats.keys():
-            self.interval_attributes.append(attr)
+            if interval_stats != {}:
+                self.interval_stats[name] = interval_stats
+                for attr in interval_stats.keys():
+                    self.interval_attributes.append(attr)
         self.interval_attributes = set(self.interval_attributes)
 
     def parse_interval_stats(self, file_path: str) -> dict({str: list}):
