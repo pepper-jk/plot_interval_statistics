@@ -154,9 +154,11 @@ def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None
     # use the Garcia preset
     pp.pre_paper_plot(True)
 
+    plt.rcParams['figure.figsize'] = (8, 4)
+
     i = 1
     for attr, name in attributes.items():
-        plt.subplot(len(attributes.items()), 1, i)
+        ax = plt.subplot(len(attributes.items()), 1, i)
         for key, values in data[attr].items():
             if limiter != [0,-1]:
                 xvalues = range(limiter[0]+1,limiter[-1]+1)
@@ -164,18 +166,17 @@ def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None
                 xvalues = range(1,len(list(values)))
             plt.plot(xvalues,values[limiter[0]:limiter[-1]], label=key.replace("_", " "))
 
-        #ls = np.linspace(float(min(values[:100])),float(max(values[:100])),num=6)
-        #print(ls)
-
-        #plt.ylim(0.0,1)
-        plt.title(name.replace("_", " "))
+        title = name.replace("_", " ")
         if ylabel != None:
-            plt.title(ylabel, loc='right', pad=100)
-        plt.grid(True)
+            title = ylabel
+        plt.text(0.01, 0.5, title,
+                 horizontalalignment='left',
+                 verticalalignment='center',
+                 transform = ax.transAxes)
 
         # legend
         if i == 1 and legend:
-            plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
+            plt.legend(bbox_to_anchor=(0., 1.2, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
 
         if i != len(attributes.items()):
             plt.tick_params(
