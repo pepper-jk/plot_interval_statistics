@@ -6,6 +6,20 @@ import sys
 import lib.plotting as plt
 import lib.parse_statistics as parse
 
+def add_cumulative(attr: str, data):
+
+    new_attr = attr+"_cumulative"
+    data[new_attr] = {}
+    for dataset, values in data[attr].items():
+        next = 0.0
+        cumulative = []
+        for elem in values:
+            next += float(elem)
+            cumulative.append(next)
+        data[new_attr].update({dataset:cumulative})
+
+    return data
+
 def main(argv):
     """
     Parsing, calculating and plotting average entropies from ID2T interval statistics files.
