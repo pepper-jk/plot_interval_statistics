@@ -164,7 +164,7 @@ def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None
             else:
                 xvalues = range(1,len(list(values)))
             plt.xlim(xvalues[0],xvalues[-1])
-            plt.plot(xvalues,values[limiter[0]:limiter[-1]], label=key.replace("_", " "))
+            plt.plot(xvalues,values[limiter[0]:limiter[-1]], label=key.replace("_", " "), linewidth=3)
         ax.axvspan(vline[0], vline[-1], color='#cacaca', alpha=0.9)
 
         title = name.replace("_", " ")
