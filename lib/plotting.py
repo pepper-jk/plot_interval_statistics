@@ -143,8 +143,7 @@ def plot_lines(data: dict(dict({str: list}))=None, plot_name: str="line", limite
 
     return True
 
-def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None, plot_name: str="line", limiter=[0,-1], ylabel: str=None, xlabel: str=None, annotate: bool=False, legend: bool=True) -> bool:
-
+def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None, plot_name: str="line", limiter: list=[0,-1], vline: list=[], ylabel: str=None, xlabel: str=None, annotate: bool=False, legend: bool=True) -> bool:
 
     # default data for testing
     if data is None:
@@ -165,6 +164,8 @@ def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None
             else:
                 xvalues = range(1,len(list(values)))
             plt.plot(xvalues,values[limiter[0]:limiter[-1]], label=key.replace("_", " "))
+        for x in vline:
+            plt.axvline(x, color='tab:gray', alpha=.75)
 
         title = name.replace("_", " ")
         if ylabel != None:
