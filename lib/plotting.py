@@ -203,8 +203,8 @@ def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None
         filename += '_limited'
 
     import subprocess
-    plt.savefig(name + ".svg", format="svg")
-    incmd = ["inkscape", name + ".svg", "--export-pdf={}.pdf".format(name),
+    plt.savefig(filename + ".svg", format="svg")
+    incmd = ["inkscape", filename + ".svg", "--export-pdf={}.pdf".format(filename),
                 "--export-pdf-version=1.5"]  # "--export-ignore-filters",
     subprocess.check_output(incmd)
 
