@@ -95,7 +95,9 @@ def main(argv):
                   "ip_src_entropy": "IP Src. Entropy",
                   "ip_dst_entropy": "IP Dst. Entropy"}
 
-    result = plt.plot_multi_lines(data, attributes)
+    dataset_name = file_paths[0][:file_paths[0].rfind('/')]
+    dataset_name = dataset_name[dataset_name.rfind('/')+1:]
+    result = plt.plot_multi_lines(data, attributes, plot_name=dataset_name, vline=limit)
 
     if not result:
         return 1
