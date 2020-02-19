@@ -86,10 +86,13 @@ def main(argv):
             previous_ts = ts
         break
 
-    attributes = {"ttl_entropy": "TTL entropy",
-                  "pkts_count": "Amount of packets",
-                  "ip_src_entropy": "IP source entropy",
-                  "ip_dst_entropy": "IP destination entropy"}
+    data = add_cumulative("ttl_entropy", data)
+
+    attributes = {"pkt_rate": "Packets per Second",
+                  "ttl_entropy": "TTL entropy",
+                  "ttl_entropy_cumulative": "TTL Cumulative Entropy",
+                  #"ip_src_entropy": "IP Source Entropy",
+                  "ip_dst_entropy": "IP Destination Entropy"}
 
     result = plt.plot_multi_lines(data, attributes)
 
