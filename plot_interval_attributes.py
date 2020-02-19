@@ -89,10 +89,11 @@ def main(argv):
     data = add_cumulative("ttl_entropy", data)
 
     attributes = {"pkt_rate": "Packets per Second",
-                  "ttl_entropy": "TTL entropy",
+                  # for attack only plot (instead of cumulative)
+                  #"ttl_entropy": "TTL entropy",
                   "ttl_entropy_cumulative": "TTL Cumulative Entropy",
-                  #"ip_src_entropy": "IP Source Entropy",
-                  "ip_dst_entropy": "IP Destination Entropy"}
+                  "ip_src_entropy": "IP Src. Entropy",
+                  "ip_dst_entropy": "IP Dst. Entropy"}
 
     result = plt.plot_multi_lines(data, attributes)
 
