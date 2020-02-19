@@ -77,12 +77,12 @@ def main(argv):
 
     for val in data["last_pkt_timestamp"].values():
         for i, ts in enumerate(val):
-            if int(ts) > limiting_ts[0]:
+            if int(ts) > limiting_ts[0] and len(limit) == 0:
                 limiting_ts[0] = previous_ts
-                limit.append(i)
-            if int(ts) > limiting_ts[1]:
+                limit.append(i+1)
+            if int(ts) > limiting_ts[1] and len(limit) < 2:
                 limiting_ts[1] = ts
-                limit.append(i)
+                limit.append(i+1)
             previous_ts = ts
         break
 
