@@ -59,9 +59,9 @@ def plot_bars(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: 
         width = width*3.5
     half = int(len(data)/2)
     add = -half
-    bars = []
-    for values in data.values():
-        bars.append(ax.bar(ind+width*add, list(values.values()), width))
+    bars = {}
+    for key, values in sorted(data.items()):
+        bars.update({key: ax.bar(ind+width*add, list(values.values()), width)})
         add = add + 1
 
     # label bars
@@ -86,7 +86,7 @@ def plot_bars(data: list(dict({str: dict}))=None, plot_name: str="bar", ylabel: 
 
     # legend
     if legend:
-        ax.legend(bars, data.keys(), bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
+        ax.legend(bars.values(), bars.keys(), bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=4, mode="expand", borderaxespad=0.)
 
     # plot
     filename = plot_name.lower().replace(" ", "_")
@@ -108,7 +108,7 @@ def plot_lines(data: dict(dict({str: list}))=None, plot_name: str="line", limite
 
     fig, ax = plt.subplots()
 
-    for key, values in data.items():
+    for key, values in sorted(data.items()):
         if limiter != [0,-1]:
             xvalues = range(limiter[0]+1,limiter[-1]+1)
         else:
@@ -158,7 +158,7 @@ def plot_multi_lines(data: dict(dict({str: list}))=None, attributes: dict()=None
     i = 1
     for attr, name in attributes.items():
         ax = plt.subplot(len(attributes.items()), 1, i)
-        for key, values in data[attr].items():
+        for key, values in sorted(data[attr].items()):
             if limiter != [0,-1]:
                 xvalues = range(limiter[0]+1,limiter[-1]+1)
             else:
